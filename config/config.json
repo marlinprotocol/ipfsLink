@@ -1,0 +1,17 @@
+{
+    "sol": {
+        "TLD": "pub"
+    },
+    "arb": {
+        "rpc_url": "https://arb1.arbitrum.io/rpc",
+        "TLD": "place"
+    },
+    "manta": {
+        "rpc_url": "https://pacific-rpc.manta.network/http",
+        "TLD": "place"
+    },
+    "activeResolvers": [
+        "arb",
+        "sol"
+    ]
+}
