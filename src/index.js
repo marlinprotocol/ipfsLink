@@ -1,10 +1,10 @@
-const express = require('express');
-const cors = require('cors');
-const needle = require('needle');
-const { caching } = require('cache-manager');
+import express from 'express';
+import cors from 'cors';
+import needle from 'needle';
+import { caching } from 'cache-manager';
 
-const resolvers = require("./resolver");
-const matcher = require("./matcher");
+import resolvers from"./resolver/index.js";
+import matcher from"./matcher.js";
 
 let memoryCache, ipfsGateway;
 
@@ -36,7 +36,7 @@ app.get('/*', async (req, res) => {
     });
 });
 
-async function init(port, _ipfsGateway, config) {
+export async function init(port, _ipfsGateway, config) {
     await matcher.init(config);
     await resolvers.init(config);
 
@@ -48,8 +48,4 @@ async function init(port, _ipfsGateway, config) {
     app.listen(port, async () => {
         console.log(`SpaceLink is listening at http://localhost:${port}`);
     });
-}
-
-module.exports = {
-    init
 }

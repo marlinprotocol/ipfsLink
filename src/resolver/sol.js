@@ -1,5 +1,5 @@
-const { getIpfsRecord } = require('@bonfida/spl-name-service');
-const { Connection, clusterApiUrl } = require('@solana/web3.js');
+import { getIpfsRecord } from '@bonfida/spl-name-service';
+import { Connection, clusterApiUrl } from '@solana/web3.js';
 
 let connection;
 
@@ -18,7 +18,7 @@ const resolveDomain = async (domain) => {
     }
 }
 
-module.exports = {
+export default {
     init,
     resolveDomain
 }
