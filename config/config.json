@@ -10,6 +10,10 @@
         "rpc_url": "https://pacific-rpc.manta.network/http",
         "TLD": "place"
     },
+    "bera": {
+        "rpc_url": "https://rpc.ankr.com/berachain_testnet",
+        "TLD": "place"
+    },
     "activeResolvers": [
         "arb",
         "sol"

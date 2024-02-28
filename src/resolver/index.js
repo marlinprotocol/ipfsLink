@@ -1,6 +1,7 @@
 import solResolver from "./sol.js";
 import arbResolver from "./arb.js";
 import mantaResolver from "./manta/index.js";
+import beraResolver from "./beraname.js";
 
 const init = async (config) => {
     if(config.sol) {
@@ -14,6 +15,10 @@ const init = async (config) => {
     if(config.manta) {
         await mantaResolver.init(config.arb);
     }
+
+    if(config.bera) {
+        await beraResolver.init(config.bera);
+    }
 }
 
 export default {
@@ -21,6 +26,7 @@ export default {
     resolvers: {
         sol: solResolver.resolveDomain,
         arb: arbResolver.resolveDomain,
-        manta: mantaResolver.resolveDomain
+        manta: mantaResolver.resolveDomain,
+        bera: beraResolver.resolveDomain
     }
 }
