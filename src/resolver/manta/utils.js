@@ -3,13 +3,13 @@ import { createPublicClient, getContract, http, namehash, toHex } from "viem";
 import { mainnet } from "viem/chains";
 import { VerifiedTldHubAbi } from "./abi.js";
 
-export async function getNamehash({ name, config }) {
+export async function getNamehash({ name, hubAddress }) {
     const tld = name.split('.').pop()?.toLowerCase()
     if (!tld) {
         return null
     }
     try {
-        const tldInfo = await getTldInfo([tld], config)
+        const tldInfo = await getTldInfo([tld], hubAddress)
         if (!tldInfo || !tldInfo.at(0)?.sann) {
             return null
         }
@@ -22,21 +22,21 @@ export async function getNamehash({ name, config }) {
     }
 }
 
-async function getTldInfo(tldList, config) {
-    const hubContract = getVerifiedTldHubContract(config)
+async function getTldInfo(tldList, hubAddress) {
+    const hubContract = getVerifiedTldHubContract(hubAddress)
     const tldInfoList = await hubContract.read.getTldInfo([tldList])
     return tldInfoList.filter((e) => !!e.tld)
 }
 
 
-function getVerifiedTldHubContract(config) {
+function getVerifiedTldHubContract(hubAddress) {
     const ethClient = createPublicClient({
         chain: mainnet,
         transport: http('https://rpc.ankr.com/eth'),
     })
 
     const hubContract = getContract({
-        address: config.contracts.hub,
+        address: hubAddress,
         abi: VerifiedTldHubAbi,
         publicClient: ethClient,
     })

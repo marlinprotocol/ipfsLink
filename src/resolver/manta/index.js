@@ -10,20 +10,24 @@ let provider,
 
 const init = async (conf) => {
     config = conf;
-    const rpcUrl = "https://pacific-rpc.manta.network/http";
     const registryAddress = config.contracts.registry;
-    provider = new ethers.providers.JsonRpcProvider(rpcUrl)
+    provider = new ethers.providers.JsonRpcProvider(config.rpc_url)
     registry = new ethers.Contract(registryAddress, SIDRegistryABI, provider);
 };
 
 const resolveDomain = async (domain) => {
     try {
-        const nodeId = await getNamehash({ name: `${domain}.manta`, config });
-        const resolverAddress = await registry.callStatic.resolver(nodeId);
+        const nodeId = await getNamehash({ name: `${domain}.manta`, hubAddress: config.contracts.hub });
+        const resolverAddress = await registry.resolver(nodeId);
+        if(resolverAddress == ethers.constants.AddressZero)
+            throw Error("Domain doesn't exist");
 
         const resolver = new ethers.Contract(resolverAddress, PublicResolverABI, provider);
-        const contenthash = await resolver.callStatic.contenthash(nodeId);
-        const base16ContentHash = contenthash.replace(/^0xe301/, 'f')
+        const contenthash = await resolver.contenthash(nodeId);
+        if(!contenthash.includes("0xe301"))
+            throw Error("content hash doesn't exist");
+
+        const base16ContentHash = contenthash.replace(/^0xe301/, 'f');
         const v1Hash = CID.parse(base16ContentHash, base16.decoder).toString();
         const v0Hash = CID.parse(v1Hash).toV0().toString();
         return `ipfs/${v0Hash}`;
