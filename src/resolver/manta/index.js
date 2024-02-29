@@ -5,9 +5,11 @@ import { PublicResolverABI, SIDRegistryABI } from './abi.js';
 import { getNamehash } from './utils.js';
 
 let provider,
-    registry;
+    registry,
+    config;
 
-const init = async (config) => {
+const init = async (conf) => {
+    config = conf;
     const rpcUrl = "https://pacific-rpc.manta.network/http";
     const registryAddress = config.contracts.registry;
     provider = new ethers.providers.JsonRpcProvider(rpcUrl)
@@ -16,7 +18,7 @@ const init = async (config) => {
 
 const resolveDomain = async (domain) => {
     try {
-        const nodeId = await getNamehash({ name: `${domain}.manta` });
+        const nodeId = await getNamehash({ name: `${domain}.manta`, config });
         const resolverAddress = await registry.callStatic.resolver(nodeId);
 
         const resolver = new ethers.Contract(resolverAddress, PublicResolverABI, provider);
