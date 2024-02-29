@@ -1,9 +1,9 @@
-import { createPublicClient, getContract, http, namehash, toHex } from "viem";
-import { mainnet } from "viem/chains";
-import { VerifiedTldHubAbi } from "./abi.js";
-import { ens_normalize } from "@adraffy/ens-normalize";
+const { createPublicClient, getContract, http, namehash, toHex } = require("viem");
+const { mainnet } = require("viem/chains");
+const { VerifiedTldHubAbi } = require("./abi.js");
+const { ens_normalize } = require("@adraffy/ens-normalize");
 
-export async function getNamehash({ name }) {
+async function getNamehash({ name }) {
     const tld = name.split('.').pop()?.toLowerCase()
     if (!tld) {
         return null
@@ -53,4 +53,8 @@ function tldNamehash(inputName, identifier) {
     if (!identifier) return namehash(inputName)
     const fullNameNode = `${inputName}.[${toHex(identifier, { size: 32 }).slice(2)}]`
     return namehash(fullNameNode)
+}
+
+module.exports = {
+    getNamehash
 }

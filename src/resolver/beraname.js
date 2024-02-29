@@ -1,6 +1,6 @@
-import ethers from 'ethers';
+const ethers = require('ethers');
 
-export const registryABI = [
+const registryABI = [
     "function tokenURI(uint256 id) public view override returns (string memory)"
 ];
 
@@ -37,14 +37,14 @@ const resolveDomain = async (domain) => {
     }
 }
 
-// async function main() {
-//     await init();
-//     await resolveDomain("rajatlko13");
-// }
+async function main() {
+    await init();
+    console.log(await resolveDomain("rajatlko13"));
+}
 
-// main();
+main();
 
-export default {
+module.exports = {
     init,
     resolveDomain
 }

@@ -23,7 +23,7 @@ const matchResolver = (hostname) => {
     };
 }
 
-export default {
+module.exports = {
     init,
     matchResolver
 }

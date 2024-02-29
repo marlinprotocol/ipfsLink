@@ -1,7 +1,7 @@
-import solResolver from "./sol.js";
-import arbResolver from "./arb.js";
-import mantaResolver from "./manta/index.js";
-import beraResolver from "./beraname.js";
+const solResolver = require("./sol");
+const arbResolver = require("./arb");
+const mantaResolver = require("./manta/index.js");
+const beraResolver = require("./beraname.js");
 
 const init = async (config) => {
     if(config.sol) {
@@ -21,7 +21,7 @@ const init = async (config) => {
     }
 }
 
-export default {
+module.exports = {
     init,
     resolvers: {
         sol: solResolver.resolveDomain,

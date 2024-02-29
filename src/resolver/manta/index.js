@@ -1,8 +1,8 @@
-import ethers from 'ethers';
-import { getNamehash } from './utils.js';
-import { PublicResolverABI, SIDRegistryABI } from './abi.js';
-import { CID } from 'multiformats';
-import { base16 } from "multiformats/bases/base16"
+const ethers = require('ethers');
+const { getNamehash } = require('./utils.js');
+const { PublicResolverABI, SIDRegistryABI } = require('./abi.js');
+const { CID } = import('multiformats');
+const { base16 } = import("multiformats/bases/base16");
 
 let provider,
     registry;
@@ -35,7 +35,7 @@ const resolveDomain = async (domain) => {
     }
 }
 
-export default {
+module.exports = {
     init,
     resolveDomain
 }

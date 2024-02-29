@@ -1,8 +1,8 @@
-import fs from "fs";
-import { Command } from 'commander';
+const fs = require("fs");
+const { Command } = require('commander');
 const program = new Command();
 
-import { init } from "./src/index.js";
+const { init } = require("./src/index.js");
 
 program
     .option('-p, --port <port>', 'Port to run SpaceLink on')

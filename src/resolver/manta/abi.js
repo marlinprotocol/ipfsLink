@@ -1,4 +1,4 @@
-export const VerifiedTldHubAbi = [
+const VerifiedTldHubAbi = [
     { inputs: [], stateMutability: 'nonpayable', type: 'constructor' },
     {
         anonymous: false,
@@ -123,7 +123,7 @@ export const VerifiedTldHubAbi = [
     },
 ];
 
-export const SANNContractAbi = [
+const SANNContractAbi = [
     {
         inputs: [{ internalType: 'uint256', name: 'identifier', type: 'uint256' }],
         name: 'tldBase',
@@ -133,7 +133,7 @@ export const SANNContractAbi = [
     },
 ];
 
-export const TldBaseContractAbi = [
+const TldBaseContractAbi = [
     {
         inputs: [{ internalType: 'uint256', name: 'tokenId', type: 'uint256' }],
         name: 'tokenURI',
@@ -143,10 +143,18 @@ export const TldBaseContractAbi = [
     },
 ];
 
-export const SIDRegistryABI = [
+const SIDRegistryABI = [
     "function resolver(bytes32 node) view returns(address resolver)"
 ];
 
-export const PublicResolverABI = [
+const PublicResolverABI = [
     "function contenthash(bytes32 node) view returns(bytes contenthash)"
 ];
+
+module.exports = {
+    VerifiedTldHubAbi,
+    SANNContractAbi,
+    TldBaseContractAbi,
+    SIDRegistryABI,
+    PublicResolverABI
+}
