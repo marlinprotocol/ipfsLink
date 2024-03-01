@@ -6,10 +6,10 @@ import { getNamehash } from './utils.js';
 
 let provider,
     registry,
-    config;
+    hubAddress;
 
-const init = async (conf) => {
-    config = conf;
+const init = async (config) => {
+    hubAddress = config.contracts.hub;
     const registryAddress = config.contracts.registry;
     provider = new ethers.providers.JsonRpcProvider(config.rpc_url)
     registry = new ethers.Contract(registryAddress, SIDRegistryABI, provider);
@@ -17,7 +17,7 @@ const init = async (conf) => {
 
 const resolveDomain = async (domain) => {
     try {
-        const nodeId = await getNamehash({ name: `${domain}.manta`, hubAddress: config.contracts.hub });
+        const nodeId = await getNamehash({ name: `${domain}.manta`, hubAddress });
         const resolverAddress = await registry.resolver(nodeId);
         if(resolverAddress == ethers.constants.AddressZero)
             throw Error("Domain doesn't exist");
