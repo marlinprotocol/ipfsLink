@@ -8,7 +8,11 @@
     },
     "manta": {
         "rpc_url": "https://pacific-rpc.manta.network/http",
-        "TLD": "place"
+        "TLD": "place",
+        "contracts": {
+            "registry": "0x5dc881dda4e4a8d312be3544ad13118d1a04cb17",
+            "hub": "0x754D6827A57334143eD5fB58C5b1A4aAe4396ba5"
+        }
     },
     "bera": {
         "rpc_url": "https://rpc.ankr.com/berachain_testnet",
@@ -16,6 +20,7 @@
     },
     "activeResolvers": [
         "arb",
-        "sol"
+        "sol",
+        "manta"
     ]
 }

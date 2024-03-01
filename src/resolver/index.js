@@ -13,7 +13,7 @@ const init = async (config) => {
     }
 
     if(config.manta) {
-        await mantaResolver.init(config.arb);
+        await mantaResolver.init(config.manta);
     }
 
     if(config.bera) {
