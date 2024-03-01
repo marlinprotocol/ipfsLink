@@ -16,11 +16,15 @@
     },
     "bera": {
         "rpc_url": "https://rpc.ankr.com/berachain_testnet",
-        "TLD": "place"
+        "TLD": "place",
+        "contracts": {
+            "registry": "0x8D20B92B4163140F413AA52A4106fF9490bf2122"
+        }
     },
     "activeResolvers": [
         "arb",
         "sol",
-        "manta"
+        "manta",
+        "bera"
     ]
 }

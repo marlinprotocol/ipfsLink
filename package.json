@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "esbuild ./index.js --bundle --platform=node --outfile=dist/float.cjs && pkg ./dist/float.cjs --out-path=./build --target node18-linux-x64"
   },
   "type": "module",
   "dependencies": {
