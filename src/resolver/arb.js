@@ -1,5 +1,5 @@
-const SIDfunctions = require('@siddomains/sidjs');
-const ethers = require('ethers');
+import SIDfunctions from '@siddomains/sidjs';
+import ethers from 'ethers';
 
 let sid;
 
@@ -21,7 +21,7 @@ const resolveDomain = async (domain) => {
     }
 }
 
-module.exports = {
+export default {
     init,
     resolveDomain
 }
