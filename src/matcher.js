@@ -1,4 +1,5 @@
-let suffixRegex;
+let suffixRegex, 
+    statsSuffixRegex;
 
 const init = (config) => {
     let baseDomainRegex = '';
@@ -13,6 +14,7 @@ const init = (config) => {
     TLDRegex = TLDRegex.slice(0, -1);
     // TODO: improve matching when TLDs or baseDomains are substring of each other
     suffixRegex = new RegExp(`^([a-zA-Z0-9_-]*).(${baseDomainRegex}).(${TLDRegex})$`);
+    statsSuffixRegex = new RegExp(`^(${baseDomainRegex}).(${TLDRegex})$`);
 }
 
 const matchResolver = (hostname) => {
@@ -23,7 +25,16 @@ const matchResolver = (hostname) => {
     };
 }
 
+const statsMatchResolver = (hostname) => {
+    let matches = hostname.match(statsSuffixRegex);
+    return {
+        baseDomain: matches[1],
+        urlTld: matches[2]
+    };
+}
+
 export default {
     init,
-    matchResolver
+    matchResolver,
+    statsMatchResolver
 }
