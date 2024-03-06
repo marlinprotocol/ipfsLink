@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js -p 3002 -g https://ipfs.io -c config/config.json",
+    "build": "esbuild ./index.js --bundle --platform=node --outfile=dist/ipfsLink.cjs && pkg ./dist/ipfsLink.cjs --out-path=./build "
   },
   "type": "module",
   "dependencies": {
@@ -21,6 +23,7 @@
     "viem": "^1.20.0"
   },
   "devDependencies": {
-    "pkg": "^5.8.1"
+    "pkg": "^5.8.1",
+    "esbuild": "^0.20.1"
   }
 }
