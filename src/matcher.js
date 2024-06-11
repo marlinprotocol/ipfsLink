@@ -17,6 +17,7 @@ const init = (config) => {
 
 const matchResolver = (hostname) => {
     let matches = hostname.match(suffixRegex);
+    if(!matches) return null;
     return {
         domain: matches[1],
         baseDomain: matches[2]

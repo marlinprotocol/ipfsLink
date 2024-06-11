@@ -13,6 +13,10 @@ app.use(cors());
 
 app.get('/*', async (req, res) => {
     const deconstructedDomain = matcher.matchResolver(req.hostname);
+    if(!deconstructedDomain) {
+        res.status(404).send(`Unsupported TLD`);
+        return;
+    }
     if(!deconstructedDomain.baseDomain || !deconstructedDomain.domain) {
         res.status(404).send(`Resolver doesn't exist`);
         return;
