@@ -1,4 +1,4 @@
-import { getIpfsRecord } from '@bonfida/spl-name-service';
+import { getRecordV2, Record } from '@bonfida/spl-name-service';
 import { Connection, clusterApiUrl } from '@solana/web3.js';
 
 let connection;
@@ -9,7 +9,8 @@ const init = async (config) => {
 
 const resolveDomain = async (domain) => {
     try {
-        const ipfsPath = await getIpfsRecord(connection, domain);
+        const record = await getRecordV2(connection, domain, Record.IPFS);
+        const ipfsPath = record.retrievedRecord.getContent().toString();
         return ipfsPath.replace('ipfs://', 'ipfs/');
     } catch (error) {
         console.log(error);
